@@ -1,12 +1,12 @@
-# E-Voting
+# E-Voting (React + Pyodie + FastAPI + Redis)
 
-Code source de ma démonstration de vote en ligne crée dans le cadre de mon travail de maturité
+Quellcode meiner Demonstration einer Online-Abstimmung, die im Rahmen meiner Maturaarbeit erstellt wurde
 
-# Structure du repo
+# Aufbau des Repos
 
-Ce repo contient le code source du fronted (Application React) et du serveur (Application FastAPI en python)
+Dieses Repo enthält den Quellcode für das Frontend (React Application) und den Server (FastAPI Server in Python).
 
-## Comment lancer le serveur (MacOS)
+## Wie man den Server startet (MacOS)
 brew install redis
 redis-server
 cd backend
@@ -15,11 +15,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 
-### Doc du serveur
+### Server-Dok
 http://127.0.0.1:8000/docs
 
-
-## Comment lancer le site
+## Wie man die Website startet
 cd frontend
 npm install
 npm run dev
+
+# Docker
+docker-compose up -d
