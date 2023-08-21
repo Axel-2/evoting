@@ -102,7 +102,7 @@ const InfoBox = () => {
       description: (
         <p className="mb-2 text-gray-500">
           Ja, der Quellcode der Website und des Servers ist auf <a 
-            href="https://github.com"
+            href="https://github.com/Axel-2/evoting"
             className="text-blue-600">
               GitHub
           </a> verfügbar.
