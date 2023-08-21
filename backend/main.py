@@ -69,7 +69,7 @@ def create_keys():
     response = Response(content=priv_key_str, media_type='text/plain')
     response.headers['Content-Disposition'] = 'attachment; filename=public_key.txt'
 
-    return "TEST"
+    return response
 
 @app.get("/check_key/{uuid}")
 def check_key(uuid: uuid.UUID):
@@ -104,7 +104,7 @@ def decrypt(uuid: uuid.UUID, cypher: int):
     # Delete the valid key if the vote is valid. This way the key cannot be reused.
     if valid_key:
         redis_client.delete(f"{uuid}")
-
+        
     return {"decrypted_value": message}
 
 @app.get("/vote_results")
