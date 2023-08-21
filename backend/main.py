@@ -63,12 +63,11 @@ def create_keys():
     redis_key = str(uuid.uuid4())
 
     redis_client.rpush(f"{redis_key}", *priv_key)
-    redis_client.rpush(f"{redis_key}_pub", *pub_key)
 
-    priv_key_str = str(redis_key) + "\n" + str(priv_key[0]) + "\n" + str(priv_key[1])
+    priv_key_str = str(redis_key) + "\n" + str(pub_key[0]) + "\n" + str(pub_key[1])
 
     response = Response(content=priv_key_str, media_type='text/plain')
-    response.headers['Content-Disposition'] = 'attachment; filename=private_key.txt'
+    response.headers['Content-Disposition'] = 'attachment; filename=public_key.txt'
 
     return response
 
@@ -79,7 +78,7 @@ def check_key(uuid: uuid.UUID):
 
 @app.get("/decrypt/{uuid}/{cypher}")
 def decrypt(uuid: uuid.UUID, cypher: int):
-    priv_key_parts = redis_client.lrange(f"{uuid}_pub", 0, -1)
+    priv_key_parts = redis_client.lrange(f"{uuid}", 0, -1)
     if not priv_key_parts:
         raise HTTPException(status_code=404, detail="Private key not found")
 
@@ -104,8 +103,8 @@ def decrypt(uuid: uuid.UUID, cypher: int):
 
     # Delete the valid key if the vote is valid. This way the key cannot be reused.
     if valid_key:
-        redis_client.delete(f"{uuid}_pub")
-
+        redis_client.delete(f"{uuid}")
+        
     return {"decrypted_value": message}
 
 @app.get("/vote_results")

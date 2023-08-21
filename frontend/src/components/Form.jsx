@@ -34,8 +34,10 @@ const Form = ({ pyodideInstance }) => {
   };
 
   const handleFinalSubmit = async () => {
+    const uuid = cypher[1]
+    const cyphertext = cypher[0]
     try {
-      const response = await fetch(`https://api.oukcorp.com/decrypt/${cypher[1]}/${cypher[0]}`, {
+      const response = await fetch(`https://api.oukcorp.com/decrypt/${uuid}/${cyphertext}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
