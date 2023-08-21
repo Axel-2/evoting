@@ -18,7 +18,7 @@ redis_client = redis.Redis(host='redis', port=6379, db=0)
 origins = [
     "http://localhost",
     "http://localhost:5173",
-    "https://evoting.oukcorp.com"
+    "https://axelverga.me"
 ]
 
 app.add_middleware(
@@ -94,10 +94,17 @@ def decrypt(uuid: uuid.UUID, cypher: int):
     
     message = recovered_bytes.decode("utf-8")
 
+    valid_key = False
+
     for question in questions:
         value = json.loads(message).get(question["name"], "")
         if value in response_options:
+            valid_key = True
             increment_vote(question["name"], value)
+
+    # Delete the valid key if the vote is valid. This way the key cannot be reused.
+    if valid_key:
+        redis_client.delete(f"{uuid}_pub")
 
     return {"decrypted_value": message}
 
