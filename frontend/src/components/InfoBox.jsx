@@ -38,7 +38,7 @@ const InfoBox = () => {
             direkt auf der Website einen eindeutigen Schlüssel zu generieren, zu illustrativen Zwecken.
         </p>
         <Button
-            href="https://api.oukcorp.com/keys"
+            href="https://api.axelverga.me/keys"
             download="cle_vote_demo"
         >
             Generieren Sie einen gültigen Schlüssel

@@ -13,7 +13,7 @@ const Form = ({ pyodideInstance }) => {
   useEffect(() => {
     async function fetchQuestions() {
       try {
-        const result = await fetch("https://api.oukcorp.com/questions");
+        const result = await fetch("https://api.axelverga.me/questions");
         const data = await result.json();
         setQuestions(data);
       } catch (error) {
@@ -37,7 +37,7 @@ const Form = ({ pyodideInstance }) => {
     const uuid = cypher[1]
     const cyphertext = cypher[0]
     try {
-      const response = await fetch(`https://api.oukcorp.com/decrypt/${uuid}/${cyphertext}`, {
+      const response = await fetch(`https://api.axelverga.me/decrypt/${uuid}/${cyphertext}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,6 @@
+#  # Diese Datei dient dazu, die Website auf dem Server zu starten.
+
+
 # 
 FROM python:3.9
 

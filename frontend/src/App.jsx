@@ -69,6 +69,7 @@ function App() {
 
       <main className='flex flex-col items-center px-8 pb-8 gap-10 w-full h-full'>
 
+        {/*Mit diesem Code wird ein Benachrichtigungs-Popup angezeigt*/}
         <ToastContainer 
           position="top-center"
           autoClose={5000}

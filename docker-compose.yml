@@ -1,3 +1,5 @@
+# Diese Datei dient dazu, die Website auf dem Server zu starten.
+
 version: '3'
 services:
   web:

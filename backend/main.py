@@ -44,10 +44,10 @@ questions = [
         "text": "Interessieren Sie sich für Kryptografie?"
     },
     {
-        "id": "luzern",
-        "name": "luzern",
-        "text": "Unterstützen Sie den FC Luzern?"
-    }
+        "id": "programming",
+        "name": "programming",
+        "text": "Sind Sie an Programmierung interessiert?"
+    },
 ]
 
 response_options = ["ja", "nein", "neutral"]
