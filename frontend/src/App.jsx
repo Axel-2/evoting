@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     async function getVoteData() {
       try {
-        const result = await fetch('https://api.oukcorp.com/vote_results');
+        const result = await fetch('https://api.axelverga.me/vote_results');
         const data = await result.json();
         setVoteData(data);
       } catch (error) {

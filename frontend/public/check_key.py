@@ -1,7 +1,7 @@
 from pyodide.http import pyfetch
 
 async def fetch_key_validation(uuid):
-    response = await pyfetch(f"https://api.axelverga.com/check_key/{uuid}")
+    response = await pyfetch(f"https://api.axelverga.me/check_key/{uuid}")
     return await response.json()
 
 def write_key_to_file(file_content: str):
