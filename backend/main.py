@@ -87,7 +87,7 @@ def check_key(uuid: uuid.UUID):
 
 # Funktion, die die Stimmabgabe entschlüsselt und die Stimme zählt
 @app.get("/decrypt/{uuid}/{cypher}")
-def decrypt(uuid: uuid.UUID, cypher: int):
+def decrypt_route(uuid: uuid.UUID, cypher: int):
     priv_key_parts = redis_client.lrange(f"{uuid}", 0, -1)
     if not priv_key_parts:
         raise HTTPException(status_code=404, detail="Private key not found")
