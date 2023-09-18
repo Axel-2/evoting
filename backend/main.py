@@ -13,14 +13,18 @@ app = FastAPI(
     description="This app is the backend of the e-voting app"
 )
 
+# Verbindung zur Redis-Datenbank
 redis_client = redis.Redis(host='redis', port=6379, db=0)
 
+# Liste der Urls, die auf FastAPI zugreifen dürfen
 origins = [
     "http://localhost",
     "http://localhost:5173",
     "https://axelverga.me"
 ]
 
+
+# Die oben genannte Url-Liste autorisieren
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -29,8 +33,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def increment_vote(redis_key, value):
-    redis_client.incr(f"{redis_key}_{value}")
 
 questions = [
     {
@@ -52,11 +54,16 @@ questions = [
 
 response_options = ["ja", "nein", "neutral"]
 
+# Inkrement von einer Stimme die Abstimmung.
+def increment_vote(redis_key, value):
+    redis_client.incr(f"{redis_key}_{value}")
+
+# Funktion, die die Liste der Fragen zurückgibt
 @app.get("/questions")
 def get_questions():
     return questions
 
-@app.get("/keys")
+# Funktion, die Schlüssel als Textdatei generiert und zurückgibt@app.get("/keys")
 def create_keys():
     pub_key, priv_key = generate_keys()
 
@@ -71,11 +78,13 @@ def create_keys():
 
     return response
 
+# Funktion, die eine Schlüssel-ID nimmt und prüft, ob der Schlüssel gültig ist. 
 @app.get("/check_key/{uuid}")
 def check_key(uuid: uuid.UUID):
     key_exists = redis_client.exists(str(uuid))
     return {"key_exists": key_exists}
 
+# Funktion, die die Stimmabgabe entschlüsselt und die Stimme zählt
 @app.get("/decrypt/{uuid}/{cypher}")
 def decrypt(uuid: uuid.UUID, cypher: int):
     priv_key_parts = redis_client.lrange(f"{uuid}", 0, -1)
@@ -107,6 +116,7 @@ def decrypt(uuid: uuid.UUID, cypher: int):
         
     return {"decrypted_value": message}
 
+# # Funktion, die das Ergebnis der Abstimmungen zurückgibt
 @app.get("/vote_results")
 def get_vote_results():
     results = []
