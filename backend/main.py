@@ -16,18 +16,10 @@ app = FastAPI(
 # Verbindung zur Redis-Datenbank
 redis_client = redis.Redis(host='redis', port=6379, db=0)
 
-# Liste der Urls, die auf FastAPI zugreifen dürfen
-origins = [
-    "http://localhost",
-    "http://localhost:5173",
-    "https://axelverga.me"
-]
-
-
 # Die oben genannte Url-Liste autorisieren
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
