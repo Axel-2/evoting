@@ -47,9 +47,7 @@ function App() {
   // useCallback, um Pyodide einmalig beim Start zu initialisieren
   const initializePyodide = useCallback(async () => {
     try {
-      const instance = await loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/npm/pyodide@latest',
-      });
+      const instance = await loadPyodide();
       setPyodideInstance(instance);
       setLoadingPage(false);
     } catch (error) {
