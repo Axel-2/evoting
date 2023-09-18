@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Label, Radio, Button } from "flowbite-react";
 import { Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 
+// Diese Datei repräsentiert das Abstimmungsformular und die Interaktionen
+
 const Form = ({ pyodideInstance }) => {
   const [formResponses, setFormResponses] = useState({});
   const [submitted, setSubmitted] = useState(false);

@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import HTTPException
-from encode_decode import dechiffrement
+from encode_decode import decrypt
 from keys import generate_keys
 import uuid
 import redis
@@ -63,7 +63,8 @@ def increment_vote(redis_key, value):
 def get_questions():
     return questions
 
-# Funktion, die Schlüssel als Textdatei generiert und zurückgibt@app.get("/keys")
+# Funktion, die Schlüssel als Textdatei generiert und zurückgibt
+@app.get("/keys")
 def create_keys():
     pub_key, priv_key = generate_keys()
 
@@ -97,7 +98,7 @@ def decrypt(uuid: uuid.UUID, cypher: int):
     except ValueError:
         raise HTTPException(status_code=500, detail="Invalid private key")
 
-    decrypted_value = dechiffrement(message_chiffré=cypher, d=n, n=d)
+    decrypted_value = decrypt(message_chiffré=cypher, d=n, n=d)
     recovered_bytes = decrypted_value.to_bytes((decrypted_value.bit_length() + 7) // 8, 'little')
     
     message = recovered_bytes.decode("utf-8")

@@ -1,42 +1,38 @@
-# Implémenttion simplifiée de RSA
-
-
 import random
 import sympy
 import io
 
-
-# Génération des clés par Bob
+# Schlüsselgenerierung durch Alice
 def generate_keys():
 
-    # Pour commencer, Bob génère deux nombres premiers n et q
+    # Zu Beginn erzeugt Alice zwei Primzahlen n und q
     p = sympy.randprime(2**1023, (2**1024) - 1)
     q = sympy.randprime(2**1023, (2**1024) - 1)
 
     print(p.bit_length())
     print(q.bit_length())
-    # Ensuite Bob calcule N, qui sera le modulo
+    # Dann berechnet Alice N, was das Modulo sein wird
     n = p * q
 
     print(f"N.bit_lenghth: {n.bit_length()}")
 
-    # Calculation du totient
+    # Berechnung des Phi-Funktion
     phi  = (p-1) * (q-1)
 
-    # Bob choisit une clé publique e telle que e soit premier avec phi et e < phi
+    # Bob wählt einen öffentlichen Schlüssel e, so dass e eine Primzahl von phi und e < phi ist.
     # e = random.randint(2, phi - 1)
     e = 65537
 
-    # Ce code ne devrait normalement jamais être executé mais c'est une sécurité
+    # Dieser Code sollte normalerweise nie ausgeführt werden, aber er ist eine Sicherheit.
     while sympy.gcd(e, phi) != 1:
         e = random.randint(2, phi - 1)
 
-    # Bob calcule la clé privée d telle que (d * e) % phi = 1
+    # Bob berechnet den privaten Schlüssel d so, dass (d * e) % phi = 1
     # d = e^(-1) mod phi
     d = pow(e, -1, phi)
 
-    cle_pub = (e, n)
-    cle_priv = (d, n)
+    pub_key = (e, n)
+    priv_key = (d, n)
 
-    return cle_pub, cle_priv
+    return pub_key, priv_key
 
