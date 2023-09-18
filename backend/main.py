@@ -34,19 +34,19 @@ def increment_vote(redis_key, value):
 
 questions = [
     {
-        "id": "math",
-        "name": "math",
-        "text": "Mögen Sie Mathematik?"
+        "id": "autobahnen",
+        "name": "autobahnen",
+        "text": "Sind Sie dafür, mehr Autobahnen in der Schweiz zu bauen ?"
     },
     {
-        "id": "crypto",
-        "name": "crypto",
-        "text": "Interessieren Sie sich für Kryptografie?"
+        "id": "windkraft",
+        "name": "windkraft",
+        "text": "Sind Sie für den Bau von mehr Windkraftanlagen in der Schweiz ?"
     },
     {
-        "id": "programming",
-        "name": "programming",
-        "text": "Sind Sie an Programmierung interessiert?"
+        "id": "verfassung",
+        "name": "verfassung",
+        "text": "Sind Sie für die Einführung eines neuen Feiertags am 12. September, um die Verfassung von 1848 zu feiern ?"
     },
 ]
 
