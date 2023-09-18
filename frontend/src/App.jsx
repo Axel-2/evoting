@@ -48,7 +48,7 @@ function App() {
   const initializePyodide = useCallback(async () => {
     try {
       const instance = await loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/npm/pyodide@latest',
+        indexURL: 'https://cdn.jsdelivr.net/npm/pyodide@0.23.4',
       });
       setPyodideInstance(instance);
       setLoadingPage(false);
